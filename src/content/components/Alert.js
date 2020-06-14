@@ -3,20 +3,21 @@ import { Message } from 'semantic-ui-react'
 
 
 const Alert = props => {
-    let [visible, setVisible] = useState(false)
+    let [visible, setVisible] = useState(true)
 
-    const handleDismiss = () => {
-        //dismiss message state
+    const handleDismiss = (e) => {
+        //clear message state
+        // props.setMessage(null)
         setVisible(false)
+        return visible
+        // console.log('e:', e)
 
     }
 
     if (props.message) {
-        setVisible(true)
+        // setVisible(true)
         return (
-            <Message compact negative visible={visible} onDismiss={handleDismiss}>
-                {props.message}
-            </Message>
+            <Message negative visible={visible} onDismiss={(e) => handleDismiss} content={props.message}/>
         )
     }
     return null

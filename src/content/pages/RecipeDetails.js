@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom'
+import { Link, Redirect, useParams } from 'react-router-dom'
 import { Button, Checkbox, Container, Divider, Grid, Header, Image, List, Message, Radio } from 'semantic-ui-react'
 import RecipeDetailsSnap from '../components/RecipeDetailsSnap'
 import ShareWith from '../components/ShareWith'
@@ -20,6 +20,7 @@ const RecipeDetails = props => {
     // let [checked, setChecked] = useState(false)
     // let [publicState, setPublicState] = useState()
     // let [radiostate, setRadioState] = useState()
+    
     useEffect(() => {
         //Get the token from local storage
         let token = localStorage.getItem('boilerToken')
@@ -171,9 +172,7 @@ const RecipeDetails = props => {
         share ? setShare(false) : setShare(true)
         console.log('share is', share)
     }
-    if (!props.user){
-        return null
-    }
+   
 
     let defaultImageArr = [
         'https://res.cloudinary.com/tasty-roots/image/upload/v1592157853/tasty-roots/zglx6vph69ix5trog2js.jpg',
@@ -190,6 +189,11 @@ const RecipeDetails = props => {
     let randoNum = Math.floor(Math.random() * defaultImageArr.length)
     let defaultImg = defaultImageArr[randoNum]
     
+    if (!props.user){
+        return (
+        <Redirect to="/" />
+        )
+    }
     return (
         <Container>
             <Grid >
@@ -221,6 +225,9 @@ const RecipeDetails = props => {
                         <h3>Instructions</h3>
                         <List as="ol">{instructions}</List>
                     </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <RecipeTwist />
                 </Grid.Row>
          
             </Grid>
