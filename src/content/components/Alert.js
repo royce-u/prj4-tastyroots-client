@@ -9,15 +9,16 @@ const Alert = props => {
         //clear message state
         // props.setMessage(null)
         setVisible(false)
-        return visible
         // console.log('e:', e)
-
+        setTimeout(() => {
+            setVisible(true, 2000)
+        })
     }
 
     if (props.message) {
         // setVisible(true)
         return (
-            <Message negative visible={visible} onDismiss={(e) => handleDismiss} content={props.message}/>
+            <Message negative visible={true} onDismiss={(e) => handleDismiss} content={props.message}/>
         )
     }
     return null

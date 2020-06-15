@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom'
-import {  Container, Header, Icon, Image, Card } from 'semantic-ui-react'
+import { Link, Redirect, useParams } from 'react-router-dom'
+import {  Container, Header, Icon, Image, Label, Card } from 'semantic-ui-react'
+import Moment from 'moment'
 
 const RecipeTwist = props => {
     let [recipeTwist, setRecipeTwist] = useState()
@@ -47,16 +48,19 @@ const RecipeTwist = props => {
         return null
     }
     
+    console.log('----------->', props.updateTwist)
     let display = recipeTwist.map((r) => {
+        let recipeDate = Moment(r.datePosted).format('MM/DD/YYYY')
         return (
 
         <Card key={r._id}>
+            
                 {(!r.pictures || r.pictures.length < 1) ? <Image src='
-https://res.cloudinary.com/tasty-roots/image/upload/v1592124358/tasty-roots/ow5zjggogrej4qcal99e.jpg' wrapped /> : <Image src={r.pictures[0]} wrapped />}
+https://res.cloudinary.com/tasty-roots/image/upload/v1592124358/tasty-roots/ow5zjggogrej4qcal99e.jpg' wrapped label={{content: "Twist", ribbon:true, className: "twist-bg"}}/> : <Image src={r.pictures[0]} wrapped />}
                 <Card.Content>
-                    <Card.Header as={Link} to={`/recipe/${r._id}`}>{r.recipeName}</Card.Header>
+                    <Card.Header as={Link} to={`/recipe/${r._id}`} onClick={props.setUpdateTwist(true)}>{r.recipeName}</Card.Header>
                     <Card.Meta>
-                        <span className='date'>{r.datePosted}</span>
+                        <span className='date'>{recipeDate}</span>
                     </Card.Meta>
                     <Card.Description>
                         {r.description}

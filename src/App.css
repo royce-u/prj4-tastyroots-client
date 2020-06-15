@@ -108,3 +108,7 @@ a:hover, a:visited {
   color: #84728F !important;
   background-color: white !important; 
 }
+.twist-bg {
+  background-color: rgba(223, 132, 164, 0.7) !important;
+  color: white !important;
+}

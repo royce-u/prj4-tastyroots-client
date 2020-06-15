@@ -15,12 +15,14 @@ const RecipeDetails = props => {
     let [share, setShare] = useState(false)
     let [updateShare, setUpdateShare] = useState(false)
     let { id } = useParams()
+    let [updateTwist, setUpdateTwist] = useState(false)
 
     //Fetch recipe details
     // let [checked, setChecked] = useState(false)
     // let [publicState, setPublicState] = useState()
     // let [radiostate, setRadioState] = useState()
     
+
     useEffect(() => {
         //Get the token from local storage
         let token = localStorage.getItem('boilerToken')
@@ -56,7 +58,7 @@ const RecipeDetails = props => {
                 console.log(err)
             })
             console.log("WHAT HAPPENING WITH UPDATE SHARE", updateShare)
-    }, [updateShare])
+    }, [updateShare, updateTwist])
 
     //Fetch user details
     useEffect(() => {
@@ -85,7 +87,7 @@ const RecipeDetails = props => {
                 console.log("Error in profile", err)
             })
             console.log("WHAT HAPPENING WITH UPDATE SHARE 2", updateShare)
-    }, [updateShare])
+    }, [updateShare, updateTwist])
 
     if (!recipeData.creatorId) {
         return null
@@ -95,7 +97,7 @@ const RecipeDetails = props => {
     if (recipeIngredients) {
         displayIngredients = recipeIngredients.map((i) => {
             return (
-                <List key={i._id}>{i.qty} {i.unit} {i.name}</List>
+                <List>{i.qty} {i.unit} {i.name}</List>
             )
         })
     }
@@ -104,7 +106,7 @@ const RecipeDetails = props => {
     if (steps) {
         instructions = steps.map((s) => {
             return (
-                <List.Item as="li" key={steps.indexOf(s)}>{s}</List.Item>
+                <List.Item as="li">{s}</List.Item>
             )
         })
     }
@@ -172,6 +174,7 @@ const RecipeDetails = props => {
         share ? setShare(false) : setShare(true)
         console.log('share is', share)
     }
+    console.log('parent state---->', updateTwist)
    
 
     let defaultImageArr = [
@@ -227,7 +230,7 @@ const RecipeDetails = props => {
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <RecipeTwist />
+                    <RecipeTwist updateTwist={updateTwist} setUpdateTwist={setUpdateTwist}/>
                 </Grid.Row>
          
             </Grid>
