@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, useParams } from 'react-router-dom'
-import {  Container, Header, Icon, Image, Label, Card } from 'semantic-ui-react'
+import { Link, useParams } from 'react-router-dom'
+import {  Container, Header, Icon, Image, Card, Button } from 'semantic-ui-react'
 import Moment from 'moment'
 
 const RecipeTwist = props => {
@@ -11,7 +11,7 @@ const RecipeTwist = props => {
     useEffect(() => {
         //Get the token from local storage
         let token = localStorage.getItem('boilerToken')
-        fetch(process.env.REACT_APP_SERVER_URL + 'recipe/twist/' + id, {
+        fetch(process.env.REACT_APP_SERVER_URL + 'recipe/twist/' + props.recipeId, {
             method: 'GET',
             headers: {
                 'Content-Type': "application/json",
@@ -30,7 +30,7 @@ const RecipeTwist = props => {
                         setRecipeTwist(result)
                         setSecretMessage(result)
                         console.log('Twist Results:', result)
-                       
+                    
                     })
                     .catch((innErr) => {
                         console.log('Error in RecipeDetails:', innErr)
@@ -43,6 +43,11 @@ const RecipeTwist = props => {
             })
         
     }, [])
+
+    const handleTwistLink =()=>{
+        props.updateTwist ? props.setUpdateTwist(false) : props.setUpdateTwist(true)
+    }
+
 
     if (!recipeTwist){
         return null
@@ -58,7 +63,12 @@ const RecipeTwist = props => {
                 {(!r.pictures || r.pictures.length < 1) ? <Image src='
 https://res.cloudinary.com/tasty-roots/image/upload/v1592124358/tasty-roots/ow5zjggogrej4qcal99e.jpg' wrapped label={{content: "Twist", ribbon:true, className: "twist-bg"}}/> : <Image src={r.pictures[0]} wrapped />}
                 <Card.Content>
-                    <Card.Header as={Link} to={`/recipe/${r._id}`} onClick={props.setUpdateTwist(true)}>{r.recipeName}</Card.Header>
+                    {/* <Card.Header as={Link} to={`/recipe/${r._id}`}> */}
+                    <Card.Header>
+                        <Button size="tiny" className="btn-outline" as={Link} to={`/recipe/${r._id}`} onClick={handleTwistLink}>
+                            {r.recipeName}
+                        </Button>
+                    </Card.Header>
                     <Card.Meta>
                         <span className='date'>{recipeDate}</span>
                     </Card.Meta>
@@ -72,10 +82,10 @@ https://res.cloudinary.com/tasty-roots/image/upload/v1592124358/tasty-roots/ow5z
             </Card>
         )
     })
-   
+
         return (
             <Container>
-                <Header>Twists</Header>
+                <Header as='h2' dividing className="top-spacing">Twists</Header>
                 <Card.Group>{display}</Card.Group>
             </Container>
         )
