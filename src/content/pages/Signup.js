@@ -55,7 +55,7 @@ const Signup = props => {
   return (
 
     <Container fluid className="center-form middle">
-      {message ? <Alert message={message} setMessage={setMessage}/> : ''}
+      {/* {message ? <Alert message={message} setMessage={setMessage}/> : ''} */}
       <Grid columns={2} verticalAlign="middle">
         <Grid.Row>
           <Grid.Column width={10}>

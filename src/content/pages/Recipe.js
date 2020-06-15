@@ -50,11 +50,12 @@ const Recipe = props => {
     if (recipes) {
         console.log(recipes)
         display = recipes.map((r) => {
+            let defaultImg = 'https://res.cloudinary.com/tasty-roots/image/upload/v1592160517/tasty-roots/vykzrh9lnhk25axpku2j.jpg'
             let recipeDate = Moment(r.datePosted).format('MM/DD/YYYY')
             return (
 
                 <Card key={r._id}>
-                    {(!r.pictures || r.pictures.length < 1) ? <Image src={'./ingredients.jpg'} wrapped /> : <Image src={r.pictures[0]} wrapped />}
+                    {(!r.pictures || r.pictures.length < 1) ? <Image src={defaultImg} wrapped /> : <Image src={r.pictures[0]} wrapped />}
                     <Card.Content>
                         <Card.Header textAlign="center"><Link to={`/recipe/${r._id}`}>{r.recipeName}</Link></Card.Header>
                         <Card.Meta><span className='date'>{recipeDate}</span></Card.Meta>
