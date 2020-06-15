@@ -11,7 +11,7 @@ const FamilyMembers = props => {
     let members = props.familyData.members.map((m) => {
         let memberPic
         if (!m.picture){
-            memberPic = 'http://placekitten.com/200/200'
+            memberPic = 'https://res.cloudinary.com/tasty-roots/image/upload/v1592180109/tasty-roots/w3ptru2tsjlosw7rfyi9.jpg'
         }
         else {
             memberPic = m.picture
@@ -20,7 +20,7 @@ const FamilyMembers = props => {
 
         <List.Item key={m._id} >
            <Image src={memberPic} circular size="tiny"></Image>
-           <Header textAlign="center">{m.firstname}</Header>
+           <Header textAlign="center" as="h4">{m.firstname}</Header>
         </List.Item>
         )
     })
@@ -32,7 +32,7 @@ const FamilyMembers = props => {
     //if creator does not have pic, display placeholder image (creator of family is not listed in members, must render image and name separately)
     let creatorPic
     if (!props.familyData.creatorId.picture){
-        creatorPic = 'http://placekitten.com/200/200'
+        creatorPic = 'https://res.cloudinary.com/tasty-roots/image/upload/v1592180109/tasty-roots/w3ptru2tsjlosw7rfyi9.jpg'
     }
     else {
         creatorPic = props.familyData.creatorId.picture
@@ -44,7 +44,7 @@ const FamilyMembers = props => {
         <List horizontal>
         <List.Item>
                     <Image src={creatorPic} circular size="tiny"/>
-                    <Header textAlign="center">{props.familyData.creatorId.firstname}</Header>
+                    <Header textAlign="center" as="h4">{props.familyData.creatorId.firstname}</Header>
                     </List.Item>
             {members}
         </List>

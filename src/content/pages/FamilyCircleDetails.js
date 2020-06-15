@@ -60,7 +60,7 @@ const FamilyCircleDetails = props => {
                     </Grid.Column>
             </Grid>
             <Grid.Row className="top-spacing">
-                <Header>Members</Header>
+                <Header as="h3">Members</Header>
             </Grid.Row>
             <Grid.Row>
                 <FamilyMembers familyData={familyData} />

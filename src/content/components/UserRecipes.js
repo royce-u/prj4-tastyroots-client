@@ -25,7 +25,10 @@ const UserRecipes = props => {
         let recipeDate = Moment(r.datePosted).format('MM/DD/YYYY')
         return (
             <Card key={r._id}>
-                {(!r.pictures || r.pictures.length < 1) ? <Image src={defaultImg} wrapped /> : <Image src={r.pictures[0]} wrapped />}
+                {/* {(!r.pictures || r.pictures.length < 1) ? <Image src={defaultImg} wrapped /> : (r.pictures[0] && r.originalRecipe) ? <Image src={r.pictures[0]} wrapped label={{content: "Twist", ribbon:true, className: "twist-bg"}}/> : <Image src={r.pictures[0]} wrapped/>} */}
+                {/* {if (!r.pictures || r.pictures.length < 1){
+                    <Image src={defaultImg} wrapped />
+                }} */}
                 <Card.Content>
                     <Card.Header as={Link} to={`/recipe/${r._id}`}>{r.recipeName}</Card.Header>
                     <Card.Meta>
