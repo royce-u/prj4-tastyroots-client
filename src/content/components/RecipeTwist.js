@@ -56,12 +56,14 @@ const RecipeTwist = props => {
     console.log('----------->', props.updateTwist)
     let display = recipeTwist.map((r) => {
         let recipeDate = Moment(r.datePosted).format('MM/DD/YYYY')
+        let defaultImg = 'https://res.cloudinary.com/tasty-roots/image/upload/v1592160517/tasty-roots/vykzrh9lnhk25axpku2j.jpg'
         return (
-
+ 
         <Card key={r._id}>
-            
-                {(!r.pictures || r.pictures.length < 1) ? <Image src='
-https://res.cloudinary.com/tasty-roots/image/upload/v1592124358/tasty-roots/ow5zjggogrej4qcal99e.jpg' wrapped label={{content: "Twist", ribbon:true, className: "twist-bg"}}/> : <Image src={r.pictures[0]} wrapped />}
+            {(!r.pictures || r.pictures.length < 1) ? <Image src={defaultImg} wrapped /> : <Image src={r.pictures[0]} wrapped/>}
+                {/* {(!r.pictures || r.pictures.length < 1) ? <Image src='
+https://res.cloudinary.com/tasty-roots/image/upload/v1592124358/tasty-roots/ow5zjggogrej4qcal99e.jpg' wrapped label={{content: "Twist", ribbon:true, className: "twist-bg"}}/> : <Image src={r.pictures[0]} wrapped />} */}
+
                 <Card.Content>
                     {/* <Card.Header as={Link} to={`/recipe/${r._id}`}> */}
                     <Card.Header>
