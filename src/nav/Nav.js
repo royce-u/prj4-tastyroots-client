@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Dropdown, Menu, Message } from 'semantic-ui-react'
 import Login from '../nav/Login'
 
 
@@ -16,10 +16,11 @@ const Nav = (props) => {
 
   var links = (
     <Menu pointing secondary className="top-nav">
-      <Menu.Item
+      <Message color='violet'>Sorry for the inconvenience. The site is currently down for maintenance.</Message>
+      {/* <Menu.Item
         name='Home'
         as={Link} to="/"
-      />
+      /> */}
       <Login user={props.user} updateToken={props.updateToken} message={message} setMessage={setMessage}/>
     </Menu>
   )
